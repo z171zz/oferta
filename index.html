@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mercado Livre Brasil - Frete Grátis no mesmo dia</title>
+  <meta name="description" content="Compre e venda no Mercado Livre. As melhores ofertas em eletrônicos, celulares, informática e muito mais. Frete grátis e parcelamento sem juros.">
+  <link rel="icon" href="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.73/mercadolibre/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>!function(){document.addEventListener('contextmenu',function(e){e.preventDefault();return!1});document.addEventListener('keydown',function(e){if(e.key==='F12'){e.preventDefault();return!1}if(e.ctrlKey&&e.shiftKey&&'IiJjCc'.indexOf(e.key)>-1){e.preventDefault();return!1}if(e.ctrlKey&&'UuSs'.indexOf(e.key)>-1){e.preventDefault();return!1}});document.addEventListener('selectstart',function(e){if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return!0;e.preventDefault();return!1});document.addEventListener('dragstart',function(e){e.preventDefault();return!1});(function d(){try{(function(){return!1})['constructor']('debugger')['call']()}catch(e){}setTimeout(d,300)})()}();</script>
+</head>
+<body>
+
+<!-- ====== HEADER PRINCIPAL ====== -->
+<header class="ml-header">
+  <!-- Main Header -->
+  <div class="ml-main-header">
+    <div class="ml-container ml-header-flex">
+      <a href="/" class="ml-logo">
+        <img src="https://bring.com.br/blog/wp-content/uploads/2018/05/Mercado-Livre-logo.png" alt="Mercado Livre" class="ml-logo-img">
+      </a>
+      <div class="ml-search-bar">
+        <form class="ml-search-form" onsubmit="event.preventDefault(); doSearch();">
+          <input type="text" id="searchInput" class="ml-search-input" placeholder="Buscar produtos, marcas e muito mais…" autocomplete="off">
+          <button type="submit" class="ml-search-btn" aria-label="Buscar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </button>
+        </form>
+      </div>
+      <div class="ml-header-banner-ad">
+        <img src="https://http2.mlstatic.com/D_NQ_785984-MLA80516549498_112024-OO.webp" alt="Banner" onerror="this.parentElement.style.display='none'">
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav Bar -->
+  <div class="ml-nav-bar">
+    <div class="ml-container">
+      <nav class="ml-nav">
+        <ul class="ml-nav-list">
+          <li><a href="#" class="ml-nav-link">Categorias <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></a></li>
+          <li><a href="#" class="ml-nav-link">Ofertas do dia</a></li>
+          <li><a href="#" class="ml-nav-link">Histórico</a></li>
+          <li><a href="#" class="ml-nav-link">Supermercado</a></li>
+          <li><a href="#" class="ml-nav-link">Moda</a></li>
+        </ul>
+        <div class="ml-nav-right">
+          <div class="icon-wrapper" onclick="toggleDrawer('favDrawer')">
+            <span class="ml-nav-link">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </span>
+            <span class="badge u-none" id="favBadge">0</span>
+          </div>
+          <div class="icon-wrapper m-l-20" onclick="toggleDrawer('cartDrawer')">
+            <span class="ml-nav-link">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </span>
+            <span class="badge u-none" id="cartBadge">0</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ====== HERO CAROUSEL ====== -->
+<section class="ml-hero">
+  <div class="ml-carousel" id="heroCarousel">
+    <div class="ml-carousel-track" id="carouselTrack">
+      <div class="ml-carousel-slide active bg-yellow">
+        <div class="ml-carousel-content">
+          <div class="ml-carousel-text hero-overlay">
+            <span class="ml-carousel-tag">OFERTA DO DIA</span>
+            <h2 class="text-shadow">Até 40% OFF</h2>
+            <p class="text-shadow">Nos melhores produtos selecionados</p>
+            <a href="#" class="ml-carousel-cta">Ver ofertas</a>
+          </div>
+          <div class="ml-carousel-image-full">
+            <img src="https://png.pngtree.com/png-vector/20221014/ourmid/pngtree-mega-offer-text-for-banner-vector-image-png-image_6320984.png" alt="Oferta">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ml-carousel-dots" id="carouselDots"></div>
+  </div>
+</section>
+
+<!-- ====== O QUE VOCÊ BUSCOU ====== (Será preenchido pela busca) -->
+<section class="ml-section u-none" id="searchResultsSection">
+  <div class="ml-container">
+    <div class="ml-section-header">
+      <h2 class="ml-section-title">Resultados da busca</h2>
+      <button class="link" onclick="clearSearch()">Limpar busca</button>
+    </div>
+    <div class="ml-product-grid" id="searchGrid">
+    </div>
+  </div>
+</section>
+
+<!-- ====== OFERTAS SECTION ====== -->
+<section class="ml-section" id="ofertasSection">
+  <div class="ml-container">
+    <div class="ml-section-header">
+      <h2 class="ml-section-title">Ofertas do dia</h2>
+      <a href="#" class="ml-section-link">Ver todas</a>
+    </div>
+    <div class="ml-horizontal-scroll" id="ofertasScroll">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRODUTOS EM DESTAQUE ====== -->
+<section class="ml-section" id="destaquesSection">
+  <div class="ml-container">
+    <div class="ml-section-header">
+      <h2 class="ml-section-title">Inspirado no que você viu</h2>
+      <a href="#" class="ml-section-link">Ver mais</a>
+    </div>
+    <div class="ml-product-grid" id="productGrid">
+      <!-- Skeleton loaders -->
+      <div class="ml-product-card ml-skeleton"><div class="ml-skeleton-img"></div><div class="ml-skeleton-text"></div><div class="ml-skeleton-text short"></div></div>
+      <div class="ml-product-card ml-skeleton"><div class="ml-skeleton-img"></div><div class="ml-skeleton-text"></div><div class="ml-skeleton-text short"></div></div>
+      <div class="ml-product-card ml-skeleton"><div class="ml-skeleton-img"></div><div class="ml-skeleton-text"></div><div class="ml-skeleton-text short"></div></div>
+      <div class="ml-product-card ml-skeleton"><div class="ml-skeleton-img"></div><div class="ml-skeleton-text"></div><div class="ml-skeleton-text short"></div></div>
+      <div class="ml-product-card ml-skeleton"><div class="ml-skeleton-img"></div><div class="ml-skeleton-text"></div><div class="ml-skeleton-text short"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== INFO SECTION ====== -->
+<section class="ml-info-section">
+  <div class="ml-container">
+    <div class="ml-info-grid">
+      <div class="ml-info-card">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3483FA" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <h3>Frete grátis</h3>
+        <p>Em milhares de produtos selecionados do Mercado Livre.</p>
+      </div>
+      <div class="ml-info-card">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3483FA" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h3>Proteção ao comprador</h3>
+        <p>Receba o produto que está esperando ou devolvemos o dinheiro.</p>
+      </div>
+      <div class="ml-info-card">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3483FA" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        <h3>Parcele sem juros</h3>
+        <p>Compre no cartão em até 12x sem juros.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DRAWERS (CARRINHO E FAVORITOS) ====== -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawers()"></div>
+
+<div class="drawer-panel" id="cartDrawer">
+  <div class="drawer-header">
+    <h3>Carrinho de Compras</h3>
+    <button class="drawer-close" onclick="closeDrawers()">×</button>
+  </div>
+  <div class="drawer-body" id="cartBody">
+    <div class="drawer-empty">Seu carrinho está vazio</div>
+  </div>
+  <div class="drawer-footer">
+    <div class="drawer-total"><span>Total</span> <span id="cartTotal">R$ 0,00</span></div>
+    <button class="btn-primary w-full radius-6 p-14" onclick="checkoutCart()">Continuar compra</button>
+  </div>
+</div>
+
+<div class="drawer-panel" id="favDrawer">
+  <div class="drawer-header">
+    <h3>Meus Favoritos</h3>
+    <button class="drawer-close" onclick="closeDrawers()">×</button>
+  </div>
+  <div class="drawer-body" id="favBody">
+    <div class="drawer-empty">Nenhum favorito ainda</div>
+  </div>
+</div>
+
+<script src="protect.js"></script>
+<script>
+// ====== DEVICE FINGERPRINT ======
+function getDeviceFingerprint() {
+  const data = [
+    navigator.userAgent,
+    screen.width + 'x' + screen.height,
+    Intl.DateTimeFormat().resolvedOptions().timeZone,
+    navigator.language
+  ].join('|');
+  let hash = 0;
+  for (let i = 0; i < data.length; i++) {
+    hash = ((hash << 5) - hash) + data.charCodeAt(i);
+    hash |= 0;
+  }
+  return 'fp_' + Math.abs(hash).toString(36);
+}
+const fingerprint = getDeviceFingerprint();
+
+// ====== STATE ======
+let globalProducts = [];
+let cart = JSON.parse(localStorage.getItem('cart_' + fingerprint)) || [];
+let favs = JSON.parse(localStorage.getItem('fav_' + fingerprint)) || [];
+
+function saveState() {
+  localStorage.setItem('cart_' + fingerprint, JSON.stringify(cart));
+  localStorage.setItem('fav_' + fingerprint, JSON.stringify(favs));
+  updateBadges();
+  renderCartDrawer();
+  renderFavDrawer();
+}
+
+// ====== DRAWERS ======
+function toggleDrawer(id) {
+  closeDrawers();
+  document.getElementById('drawerOverlay').classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+function closeDrawers() {
+  document.getElementById('drawerOverlay').classList.remove('active');
+  document.getElementById('cartDrawer').classList.remove('active');
+  document.getElementById('favDrawer').classList.remove('active');
+}
+
+function updateBadges() {
+  const cBadge = document.getElementById('cartBadge');
+  const fBadge = document.getElementById('favBadge');
+  
+  if(cart.length > 0) { cBadge.style.display = 'block'; cBadge.textContent = cart.length; } else cBadge.style.display = 'none';
+  if(favs.length > 0) { fBadge.style.display = 'block'; fBadge.textContent = favs.length; } else fBadge.style.display = 'none';
+}
+
+function renderCartDrawer() {
+  const body = document.getElementById('cartBody');
+  const totalEl = document.getElementById('cartTotal');
+  if(cart.length === 0) {
+    body.innerHTML = '<div class="drawer-empty">Seu carrinho está vazio</div>';
+    totalEl.textContent = 'R$ 0,00';
+    return;
+  }
+  let html = '', total = 0;
+  cart.forEach(item => {
+    total += item.price;
+    html += `
+      <div class="drawer-item">
+        <img class="drawer-item-img" src="${item.image}" alt="">
+        <div class="drawer-item-info">
+          <div class="drawer-item-name">${item.name}</div>
+          <div class="drawer-item-price">R$ ${item.price.toLocaleString('pt-BR',{minimumFractionDigits:2})}</div>
+          <button class="drawer-item-remove" onclick="removeFromCart('${item.id}')">Remover</button>
+        </div>
+      </div>
+    `;
+  });
+  body.innerHTML = html;
+  totalEl.textContent = 'R$ ' + total.toLocaleString('pt-BR',{minimumFractionDigits:2});
+}
+
+function renderFavDrawer() {
+  const body = document.getElementById('favBody');
+  if(favs.length === 0) {
+    body.innerHTML = '<div class="drawer-empty">Nenhum favorito adicionado</div>';
+    return;
+  }
+  let html = '';
+  favs.forEach(item => {
+    html += `
+      <div class="drawer-item">
+        <img class="drawer-item-img" src="${item.image}" alt="">
+        <div class="drawer-item-info">
+          <a href="/${item.slug}" class="no-underline">
+            <div class="drawer-item-name">${item.name}</div>
+            <div class="drawer-item-price">R$ ${item.price.toLocaleString('pt-BR',{minimumFractionDigits:2})}</div>
+          </a>
+          <button class="drawer-item-remove" onclick="toggleFav('${item.id}')">Remover favorito</button>
+        </div>
+      </div>
+    `;
+  });
+  body.innerHTML = html;
+}
+
+// ====== ACTIONS ======
+function addToCart(id) {
+  const product = globalProducts.find(p => p.id === id);
+  if(!product) return;
+  // check if already in cart
+  if(!cart.find(i => i.id === id)) {
+    cart.push({ id: product.id, slug: product.slug, name: product.name, price: parseFloat(product.price), image: product.images[0] });
+    saveState();
+  }
+  toggleDrawer('cartDrawer');
+}
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  saveState();
+}
+
+function toggleFav(id, ev) {
+  if(ev) ev.preventDefault();
+  const product = globalProducts.find(p => p.id === id);
+  if(!product && !favs.find(i=>i.id===id)) return; // se nao existe nos favs e nem no db
+
+  const idx = favs.findIndex(i => i.id === id);
+  if(idx > -1) {
+    favs.splice(idx, 1);
+  } else if (product) {
+    favs.push({ id: product.id, slug: product.slug, name: product.name, price: parseFloat(product.price), image: product.images[0] });
+  }
+  saveState();
+  
+  // Update icons if product grid is rendered
+  const favBtn = document.querySelector(`.card-fav-btn[data-id="${id}"]`);
+  if(favBtn) {
+    if(idx > -1) favBtn.classList.remove('active');
+    else favBtn.classList.add('active');
+  }
+}
+
+function checkoutCart() {
+  if(cart.length === 0) return alert('Carrinho vazio!');
+  // Por simplificação do checkout existente que pega selectedProduct
+  // Pegamos o primeiro item (ou implementamos multiplos itens caso queira mais complexo)
+  localStorage.setItem('selectedProduct', JSON.stringify(cart[0]));
+  window.location.href = '/comprar?token=' + Math.random().toString(36).substr(2, 10).toUpperCase();
+}
+
+function isFav(id) {
+  return favs.some(i => i.id === id);
+}
+
+// ====== LOAD PRODUCTS ======
+async function loadProducts() {
+  try {
+    var res = await fetch('/api/products');
+    if (!res.ok) throw new Error('API error');
+    var products = await res.json();
+    globalProducts = products;
+    renderProducts(products, 'productGrid');
+    renderOfertas(products);
+    updateBadges();
+    renderCartDrawer();
+    renderFavDrawer();
+  } catch(e) {
+    console.error('Erro ao carregar produtos:', e);
+    document.getElementById('productGrid').innerHTML = '<p class="empty-msg">Nenhum produto disponível no momento.</p>';
+  }
+}
+
+function renderProducts(products, containerId) {
+  var grid = document.getElementById(containerId);
+  if (!products || !products.length) {
+    grid.innerHTML = '<p class="empty-msg">Nenhum produto cadastrado.</p>';
+    return;
+  }
+  grid.innerHTML = '';
+  products.forEach(function(p) {
+    var price = parseFloat(p.price);
+    var oldPrice = p.old_price ? parseFloat(p.old_price) : 0;
+    var priceFormatted = price.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 2});
+    var oldPriceFormatted = oldPrice ? 'R$ ' + oldPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2}) : '';
+    var installment = (price / 12).toFixed(2).replace('.', ',');
+    var imgUrl = (p.images && p.images.length) ? p.images[0] : '';
+    var favActive = isFav(p.id) ? 'active' : '';
+
+    var card = document.createElement('a');
+    card.href = '/' + p.slug;
+    card.className = 'ml-product-card';
+    card.innerHTML = `
+      <div class="card-fav-btn ${favActive}" data-id="${p.id}" onclick="event.preventDefault(); toggleFav('${p.id}', event)">
+         <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <div class="ml-product-img"><img src="${imgUrl}" alt="${p.name}" loading="lazy"></div>
+      <div class="ml-product-info">
+        ${oldPrice > 0 ? '<span class="ml-old-price">'+oldPriceFormatted+'</span>' : ''}
+        <span class="ml-product-price">R$ ${priceFormatted}</span>
+        <span class="ml-product-installments">em 12x R$ ${installment} sem juros</span>
+        <span class="ml-product-shipping"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Frete grátis</span>
+        <span class="ml-product-name">${p.name}</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderOfertas(products) {
+  var container = document.getElementById('ofertasScroll');
+  if (!products.length) { container.innerHTML = ''; return; }
+  container.innerHTML = '';
+  products.slice(0, 8).forEach(function(p) {
+    var price = parseFloat(p.price);
+    var imgUrl = (p.images && p.images.length) ? p.images[0] : '';
+    var card = document.createElement('a');
+    card.href = '/' + p.slug;
+    card.className = 'ml-offer-card';
+    card.innerHTML = `
+      <div class="ml-offer-img"><img src="${imgUrl}" alt="${p.name}" loading="lazy"></div>
+      <div class="ml-offer-info">
+        <span class="ml-offer-price">R$ ${price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+        <span class="ml-offer-shipping">Frete grátis</span>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function doSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  if(!q) return clearSearch();
+  
+  const results = globalProducts.filter(p => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q));
+  
+  document.getElementById('ofertasSection').style.display = 'none';
+  document.getElementById('destaquesSection').style.display = 'none';
+  document.getElementById('searchResultsSection').style.display = 'block';
+  
+  renderProducts(results, 'searchGrid');
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('ofertasSection').style.display = 'block';
+  document.getElementById('destaquesSection').style.display = 'block';
+  document.getElementById('searchResultsSection').style.display = 'none';
+}
+
+// ====== INIT ======
+document.addEventListener('DOMContentLoaded', function() {
+  loadProducts();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comando Central - 6beck</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="/protect.js"></script>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="adm-body">
+
+<div id="loginOverlay">
+  <div class="login-box">
+    <h2>Comando Central</h2>
+    <p>Identifique-se para gerenciar sua loja</p>
+    <input type="password" id="adminPass" placeholder="Senha" onkeydown="if(event.key==='Enter') login()">
+    <button onclick="login()">Entrar no Painel</button>
+  </div>
+</div>
+
+<aside class="adm-sidebar">
+  <div class="profile-section">
+    <div class="avatar" id="profileAvatar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    </div>
+    <h3>6beck</h3>
+    <p>Admin Executivo</p>
+  </div>
+
+  <div class="menu">
+    <div class="menu-item active" onclick="switchTab('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      Dashboard
+    </div>
+    <div class="menu-item" onclick="switchTab('produtos')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+      Produtos
+    </div>
+    <div class="menu-item" onclick="switchTab('novo-produto')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      Novo Produto
+    </div>
+    <div class="menu-item" onclick="switchTab('configuracao')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      Configurações
+    </div>
+  </div>
+  
+  <div class="logout-btn" onclick="document.getElementById('logoutModal').classList.add('active')" role="button" tabindex="0">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+    Sair
+  </div>
+</aside>
+
+<main class="adm-main">
+  <div class="header-top">
+    <div class="welcome-text">
+      <h1 id="dynamicGreeting">Boa tarde, 6beck!</h1>
+      <p>Sua loja está operando com estabilidade e segurança.</p>
+    </div>
+    <div class="live-badge">
+      <div class="pulse-dot"></div>
+      Sistema Online
+    </div>
+  </div>
+
+  <!-- TAB: DASHBOARD -->
+  <div id="tab-dashboard" class="tab-content active">
+    <div class="section-title">📊 Visão Geral do Negócio</div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-title">Faturamento Total</div>
+        <div class="metric-value" id="m-revenue">R$ 0,00</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Vendas (Pagas)</div>
+        <div class="metric-value" id="m-paid">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Ticket Médio</div>
+        <div class="metric-value" id="m-ticket">R$ 0,00</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">PIX Gerados</div>
+        <div class="metric-value" id="m-pix">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Acessos Loja</div>
+        <div class="metric-value" id="m-access">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Conversão</div>
+        <div class="metric-value" id="m-conversion">0%</div>
+      </div>
+    </div>
+    
+    <div class="section-title">🛒 Monitor de Transações</div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Produto</th>
+            <th>Cliente</th>
+            <th>Status</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody id="salesTableBody">
+          <tr><td colspan="5" class="u-text-center">Sincronizando dados...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB: PRODUTOS -->
+  <div id="tab-produtos" class="tab-content">
+    <div class="section-title">📦 Inventário de Produtos</div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Preço Venda</th>
+            <th>Estoque</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="productsTableBody">
+          <tr><td colspan="4" class="u-text-center">Carregando inventário...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB: NOVO PRODUTO -->
+  <div id="tab-novo-produto" class="tab-content">
+    <div class="section-title">➕ Cadastrar Novo Item</div>
+    <div class="card adm-card adm-card-wide">
+      <div class="adm-grid-2">
+        <div>
+          <div class="form-group">
+            <label for="np-name">Nome do Produto</label>
+            <input type="text" class="form-control" id="np-name">
+          </div>
+          <div class="form-group">
+            <label for="np-slug">Slug (URL personalizada)</label>
+            <input type="text" class="form-control" id="np-slug">
+          </div>
+          <div class="adm-grid-2-tight">
+            <div class="form-group">
+              <label for="np-price">Preço Venda</label>
+              <input type="number" step="0.01" class="form-control" id="np-price">
+            </div>
+            <div class="form-group">
+              <label for="np-oldprice">Preço Riscado</label>
+              <input type="number" step="0.01" class="form-control" id="np-oldprice">
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="form-group">
+            <label>Galeria de Imagens (URLs)</label>
+            <input type="text" class="form-control adm-m-b-8" id="np-img1" placeholder="Principal">
+            <input type="text" class="form-control adm-m-b-8" id="np-img2" placeholder="Foto 2">
+            <input type="text" class="form-control adm-m-b-8" id="np-img3" placeholder="Foto 3">
+            <input type="text" class="form-control" id="np-img4" placeholder="Foto 4">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="np-source">HTML Original (Opcional)</label>
+        <textarea class="form-control" id="np-source"></textarea>
+      </div>
+      <button class="adm-btn adm-btn-block" onclick="saveProduct()">Lançar Produto</button>
+    </div>
+  </div>
+
+  <!-- TAB: CONFIGURAÇÃO -->
+  <div id="tab-configuracao" class="tab-content">
+    <div class="section-title">⚙️ Painel de Controle e Segurança</div>
+    <div class="adm-grid-config">
+      <div class="card adm-card">
+        <h3>Perfil do Admin</h3>
+        <div class="form-group">
+          <label>Identidade Visual</label>
+          <div class="adm-flex-center adm-m-b-20">
+            <div class="avatar adm-avatar-small" id="configAvatarPreview">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+            <input type="file" id="profileUpload" accept="image/*" class="sr-only" onchange="handleProfileUpload(this)" aria-label="Upload de foto do perfil">
+            <button class="adm-btn adm-btn-small adm-btn-muted" onclick="document.getElementById('profileUpload').click()">Trocar Foto</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Redefinir Senha</label>
+          <input type="password" class="form-control" id="config-pass" placeholder="Nova senha mestra">
+        </div>
+        <button class="adm-btn adm-btn-block" onclick="saveGeneralConfig()">Atualizar Perfil</button>
+      </div>
+
+      <div class="card adm-card">
+        <h3>Blindagem do Site</h3>
+        <div class="form-group">
+          <label for="config-anti">Status Anti-Inspect (F12)</label>
+          <select class="form-control" id="config-anti" aria-label="Status Anti-Inspect">
+            <option value="true">Ativado (Máxima Proteção)</option>
+            <option value="false">Desativado</option>
+          </select>
+        </div>
+        <button class="adm-btn adm-btn-block adm-btn-muted" onclick="saveGeneralConfig()">Salvar Ajustes</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="adm-modal" id="logoutModal" role="dialog" aria-modal="true">
+  <div class="adm-modal-content">
+    <h3>Sair do sistema?</h3>
+    <p>Até logo, 6beck. Suas alterações foram salvas.</p>
+    <div class="adm-modal-footer">
+      <button class="adm-btn adm-btn-muted" onclick="document.getElementById('logoutModal').classList.remove('active')">Voltar</button>
+      <button class="adm-btn adm-btn-danger" onclick="logout()">Encerrar Sessão</button>
+    </div>
+  </div>
+</div>
+
+<div id="config-toast" class="adm-toast u-none">Configuração salva!</div>
+
+<script>
+let adminPass = sessionStorage.getItem('adminPass') || '';
+
+// Greeting Dinâmico
+function setGreeting() {
+  const hour = new Date().getHours();
+  let greet = "Bom dia";
+  if(hour >= 12 && hour < 18) greet = "Boa tarde";
+  else if(hour >= 18 || hour < 5) greet = "Boa noite";
+  document.getElementById('dynamicGreeting').textContent = `${greet}, 6beck!`;
+}
+
+async function login() {
+  const pass = document.getElementById('adminPass').value;
+  try {
+    const res = await fetch('/api/admin?type=login&pass=' + encodeURIComponent(pass), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({pass})
+    });
+    if(res.ok) {
+      sessionStorage.setItem('adminPass', pass);
+      sessionStorage.setItem('admin_logged_in', 'true');
+      adminPass = pass;
+      document.getElementById('loginOverlay').style.display = 'none';
+      loadDashboard();
+      setTimeout(() => location.reload(), 500);
+    } else { alert('Senha incorreta!'); }
+  } catch(e) { alert('Erro de conexão'); }
+}
+
+function logout() {
+  sessionStorage.clear();
+  window.location.href = '/';
+}
+
+if(adminPass) {
+  document.getElementById('loginOverlay').style.display = 'none';
+  setGreeting();
+  loadDashboard();
+  loadConfig();
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.menu-item').forEach(e => e.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(e => e.classList.remove('active'));
+  document.querySelectorAll('.menu-item').forEach(m => {
+      if(m.getAttribute('onclick') && m.getAttribute('onclick').includes("switchTab('" + id + "')")) m.classList.add('active');
+  });
+  document.getElementById('tab-' + id).classList.add('active');
+  if(id === 'dashboard') loadDashboard();
+  if(id === 'configuracao') loadConfig();
+}
+
+const fmtMoney = (val) => new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(val);
+const fmtDate = (str) => new Date(str).toLocaleString('pt-BR');
+
+async function loadDashboard() {
+  if(!adminPass) return;
+  try {
+    const res = await fetch('/api/admin?type=sales&pass=' + encodeURIComponent(adminPass));
+    if(res.status === 401) return logout();
+    const data = await res.json();
+
+    document.getElementById('m-revenue').textContent = fmtMoney(Number(data.revenue) || 0);
+    document.getElementById('m-paid').textContent = Number(data.total_paid) || 0;
+    const ticket = (Number(data.total_paid) > 0) ? (Number(data.revenue) / Number(data.total_paid)) : 0;
+    document.getElementById('m-ticket').textContent = fmtMoney(ticket);
+    document.getElementById('m-pix').textContent = Number(data.total_pix) || 0;
+    
+    let storedAccess = parseInt(localStorage.getItem('total_access'));
+    if (isNaN(storedAccess) || storedAccess <= 0) {
+        storedAccess = ((Number(data.total_pix) || 0) * 3) + Math.floor(Math.random() * 10) + 5;
+    }
+    localStorage.setItem('total_access', storedAccess);
+    document.getElementById('m-access').textContent = storedAccess;
+    const conv = (storedAccess > 0) ? ((Number(data.total_paid || 0) / storedAccess) * 100).toFixed(1) : "0.0";
+    document.getElementById('m-conversion').textContent = conv + '%';
+
+    const tbody = document.getElementById('salesTableBody');
+    tbody.innerHTML = '';
+    if(data.sales && data.sales.length > 0) {
+      data.sales.slice(0, 50).forEach(s => {
+        const isPaid = s.status === 'paid' || s.status === 'completed';
+        tbody.innerHTML += `<tr>
+          <td>${fmtDate(s.created_at)}</td>
+          <td class="adm-fw-600">${s.product_name || 'Removido'}</td>
+          <td class="adm-c-muted">${s.customer_name || '-'}</td>
+          <td><span class="status-badge ${isPaid ? 'status-paid' : 'status-pending'}">${s.status.toUpperCase()}</span></td>
+          <td class="adm-fw-600">${fmtMoney(s.amount)}</td>
+        </tr>`;
+      });
+    } else { tbody.innerHTML = '<tr><td colspan="5" class="u-text-center">Sem vendas.</td></tr>'; }
+
+    const ptbody = document.getElementById('productsTableBody');
+    ptbody.innerHTML = '';
+    if(data.products) {
+      data.products.filter(p => p.active).forEach(p => {
+        ptbody.innerHTML += `<tr>
+          <td>${p.name}</td>
+          <td class="adm-fw-600 c-primary">${fmtMoney(p.price)}</td>
+          <td>${p.stock}</td>
+          <td><button class="adm-btn adm-btn-small adm-btn-danger" onclick="deleteProduct('${p.id}')">Excluir</button></td>
+        </tr>`;
+      });
+    }
+  } catch(e) {}
+}
+
+async function loadConfig() {
+  if(!adminPass) return;
+  try {
+    const res = await fetch('/api/admin?type=config&pass=' + encodeURIComponent(adminPass));
+    const data = await res.json();
+    if(data.general) document.getElementById('config-anti').value = data.general.anti_inspect === false ? 'false' : 'true';
+    if(data.profile_image && data.profile_image.url) {
+      updateAvatarUI(data.profile_image.url);
+    }
+  } catch(e) {}
+}
+
+function updateAvatarUI(url) {
+  const av = document.getElementById('profileAvatar');
+  const pav = document.getElementById('configAvatarPreview');
+  const imgHtml = `<img src="${url}" alt="Profile">`;
+  av.innerHTML = imgHtml;
+  pav.innerHTML = imgHtml;
+}
+
+function handleProfileUpload(input) {
+  if(input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = async function(e) {
+      const base64 = e.target.result;
+      updateAvatarUI(base64);
+      await fetch('/api/admin?type=config&pass=' + encodeURIComponent(adminPass), {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: 'profile_image', value: { url: base64 } })
+      });
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+async function saveProduct() {
+  const name = document.getElementById('np-name').value;
+  const slug = document.getElementById('np-slug').value;
+  const price = document.getElementById('np-price').value;
+  const oldPrice = document.getElementById('np-oldprice').value;
+  const source = document.getElementById('np-source').value;
+  const imgs = [document.getElementById('np-img1').value, document.getElementById('np-img2').value, document.getElementById('np-img3').value, document.getElementById('np-img4').value].filter(i => i);
+
+  if(!name || !slug || !price || imgs.length < 4) return alert('Campos obrigatórios faltando.');
+  const payload = { name, slug, price, old_price: oldPrice, source_html: source, images: imgs };
+
+  try {
+    const res = await fetch('/api/admin?pass=' + encodeURIComponent(adminPass), {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+    });
+    if(res.ok) { alert('Produto salvo!'); switchTab('produtos'); }
+  } catch(e) { alert('Erro'); }
+}
+
+async function deleteProduct(id) {
+  if(!confirm('Excluir?')) return;
+  try {
+    const res = await fetch('/api/admin?pass=' + encodeURIComponent(adminPass) + '&id=' + id, { method: 'DELETE' });
+    if(res.ok) loadDashboard();
+  } catch(e) {}
+}
+
+async function saveGeneralConfig() {
+  const nPass = document.getElementById('config-pass').value;
+  const anti = document.getElementById('config-anti').value === 'true';
+  const toast = document.getElementById('config-toast');
+  toast.classList.remove('u-none');
+  setTimeout(() => toast.classList.add('u-none'), 3000);
+  if(nPass.trim()) {
+    await fetch('/api/admin?type=config&pass=' + encodeURIComponent(adminPass), {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: 'admin_password', value: { password: nPass } })
+    });
+  }
+  const res = await fetch('/api/admin?type=config&pass=' + encodeURIComponent(adminPass), {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: 'general', value: { anti_inspect: anti } })
+  });
+  if(res.ok) alert('Salvo!');
+}
+</script>
+</body>
+</html>

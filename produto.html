@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produto | Mercado Livre</title>
+  <meta name="description" content="Compre agora no Mercado Livre com frete grátis e parcelamento sem juros.">
+  <link rel="icon" href="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.73/mercadolibre/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script>!function(){document.addEventListener('contextmenu',function(e){e.preventDefault();return!1});document.addEventListener('keydown',function(e){if(e.key==='F12'){e.preventDefault();return!1}if(e.ctrlKey&&e.shiftKey&&'IiJjCc'.indexOf(e.key)>-1){e.preventDefault();return!1}if(e.ctrlKey&&'UuSs'.indexOf(e.key)>-1){e.preventDefault();return!1}});document.addEventListener('selectstart',function(e){if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return!0;e.preventDefault();return!1});document.addEventListener('dragstart',function(e){e.preventDefault();return!1});(function d(){try{(function(){return!1})['constructor']('debugger')['call']()}catch(e){}setTimeout(d,300)})()}();</script>
+</head>
+<body class="u-fade-in-init">
+
+  <!-- HEADER -->
+  <header class="ml-header">
+    <div class="ml-main-header">
+      <div class="ml-container ml-header-flex">
+          <img src="https://bring.com.br/blog/wp-content/uploads/2018/05/Mercado-Livre-logo.png" alt="Mercado Livre" class="ml-logo-img">
+        <div class="ml-search-bar">
+          <form class="ml-search-form" action="/" method="GET">
+            <input type="text" class="ml-search-input" placeholder="Buscar produtos, marcas e muito mais…">
+            <button type="submit" class="ml-search-btn" aria-label="Buscar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="ml-nav-bar">
+      <div class="ml-container">
+        <nav class="ml-nav">
+          <ul class="ml-nav-list">
+            <li><a href="/" class="ml-nav-link">← Voltar</a></li>
+            <li><a href="#" class="ml-nav-link">Categorias</a></li>
+            <li><a href="#" class="ml-nav-link">Ofertas do dia</a></li>
+            <li><a href="#" class="ml-nav-link">Supermercado</a></li>
+            <li><a href="#" class="ml-nav-link">Moda</a></li>
+            <li><a href="#" class="ml-nav-link">Ajuda</a></li>
+          </ul>
+          <div class="ml-nav-right">
+            <div class="icon-wrapper" onclick="toggleDrawer('favDrawer')">
+              <span class="ml-nav-link">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </span>
+              <span class="badge u-none" id="favBadge">0</span>
+            </div>
+            <div class="icon-wrapper m-l-20" onclick="toggleDrawer('cartDrawer')">
+              <span class="ml-nav-link">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              </span>
+              <span class="badge u-none" id="cartBadge">0</span>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+      <a href="/" class="bc-link">Início</a> &gt;
+      <span class="bc-link">Produtos</span> &gt;
+      <span class="bc-current" id="breadcrumbName">Carregando...</span>
+    </nav>
+
+    <div class="product-layout">
+      <!-- LEFT: Gallery -->
+      <div class="gallery-col">
+        <div class="gallery-card">
+          <div class="gallery-flex">
+            <div class="thumbnails" id="thumbnails"></div>
+            <div class="main-image-wrap">
+              <div class="main-image-container">
+                <div class="card-fav-btn gallery-fav-btn-pos" id="galleryFavBtn" onclick="toggleFavProduct()">
+                   <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </div>
+
+                <img id="mainImage" src="" alt="Produto" class="main-image">
+                <button class="gallery-arrow arrow-left" onclick="prevImage()" aria-label="Imagem anterior">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button class="gallery-arrow arrow-right" onclick="nextImage()" aria-label="Próxima imagem">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+                <div class="gallery-actions m-t-10">
+                  <button class="action-circle" onclick="openModal('shareModal')" aria-label="Compartilhar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                  </button>
+                </div>
+                <div class="image-counter" id="imageCounter">1/1</div>
+              </div>
+              <div class="mobile-dots" id="mobileDots"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Buy Panel -->
+      <div class="buy-col">
+        <div class="card buy-panel">
+          <p class="condition">Novo</p>
+          <h1 class="product-title" id="productTitle">Carregando...</h1>
+          <div class="price-section">
+            <span class="ml-old-price u-none" id="oldPrice"></span>
+            <div class="price-main">
+              <span class="price-integer" id="priceInteger">R$ 0,</span><span class="price-cents" id="priceCents">00</span>
+            </div>
+            <p class="installments"><span class="green bold" id="installmentText">12x R$ 0,00</span> sem juros</p>
+            <a href="#" class="link text-sm" onclick="openModal('paymentModal');return false">Ver os meios de pagamento</a>
+          </div>
+
+          <div class="shipping-section">
+            <div class="shipping-row">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A650" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              <div><p class="shipping-text"><span class="green bold">Chegará grátis</span> entre 3 e 7 dias úteis</p></div>
+            </div>
+            <a href="#" class="link text-sm shipping-calc-link" onclick="openModal('addressModal');return false">Calcular frete</a>
+          </div>
+
+          <div class="stock-section">
+            <p class="stock-label">Estoque disponível</p>
+            <p class="quantity-text">Quantidade: <span class="bold">1</span> <span class="muted" id="stockInfo">(+50 disponíveis)</span></p>
+          </div>
+
+          <div class="buy-buttons">
+            <button class="btn-primary" onclick="handleBuyNow()">Comprar agora</button>
+            <button class="btn-secondary" onclick="addToCartProduct()">Adicionar ao carrinho</button>
+          </div>
+
+          <div class="sold-by">
+            <p class="muted text-sm">Vendido por <a href="#" class="link" id="sellerName">LEGO</a></p>
+          </div>
+
+          <div class="benefits">
+            <div class="benefit-row">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A650" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+              <p class="text-sm"><span class="green bold">Devolução grátis.</span> Você tem 30 dias a partir da data de recebimento.</p>
+            </div>
+            <div class="benefit-row">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A650" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <p class="text-sm"><span class="green bold">Compra Garantida.</span> Receba o produto que está esperando ou devolvemos o dinheiro.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seller Info -->
+        <div class="card seller-card">
+          <h2 class="seller-title u-flex u-items-center" id="sellerTitle">Vendido por Mercado Livre</h2>
+          <p class="muted text-sm seller-loja-oficial">Loja oficial</p>
+          <p class="text-sm seller-sales-count">+100.000 vendas concluídas</p>
+          <div class="m-t-16 u-flex u-items-center u-gap-4">
+             <div class="u-flex-1 u-h-8 bg-red-light u-radius-4"></div>
+             <div class="u-flex-1 u-h-8 bg-orange-light u-radius-4"></div>
+             <div class="u-flex-1 u-h-8 bg-yellow-light u-radius-4"></div>
+             <div class="u-flex-1 u-h-8 bg-green-light u-radius-4"></div>
+             <div class="u-flex-1-5 u-h-12 u-color-green-bg u-radius-4"></div>
+          </div>
+          <div class="seller-divider u-flex u-justify-between m-t-16 u-text-center u-p-t-16 u-border-t">
+             <div class="u-flex-1">
+               <p class="u-bold u-color-333 u-text-lg">Procedência</p>
+               <p class="muted text-sm u-text-xs m-t-2">Garantia total de originalidade</p>
+             </div>
+             <div class="u-flex-1 u-border-l u-p-l-12">
+               <p class="u-bold u-color-green u-text-lg">Frete<br>Full</p>
+               <p class="muted text-sm u-text-xs m-t-2">Envios mais rápidos do Brasil</p>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT DETAILS -->
+    <div class="details-section">
+      <!-- Description -->
+      <div class="card" id="descriptionCard">
+        <h2 class="section-title">Descrição</h2>
+        <p id="productDescription" class="product-desc-text"></p>
+      </div>
+
+      <!-- Characteristics -->
+      <div class="card">
+        <h2 class="section-title">Características do produto</h2>
+        <h3 class="subsection-title">Características principais</h3>
+        <table class="specs-table" id="mainSpecs"></table>
+      </div>
+
+      <!-- Product Records -->
+      <div class="card">
+        <h2 class="subsection-title">Registros de produtos</h2>
+        <table class="specs-table" id="recordSpecs"></table>
+        <button class="expand-btn" onclick="openModal('characteristicsModal')">
+          <span>Conferir todas as características</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- Returns -->
+      <div class="card">
+        <h2 class="card-title-bold">Devolução grátis</h2>
+        <p class="muted text-sm">Você tem 30 dias a partir do recebimento do produto para devolvê-lo, não importa o motivo!</p>
+        <button class="expand-btn" onclick="openModal('returnsModal')">
+          <span>Ver mais sobre devoluções</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- Payment Methods -->
+      <div class="card">
+        <h2 class="card-title-bold">Meios de pagamento</h2>
+        <p class="green text-sm m-b-16">Pague em até 12x sem juros!</p>
+        <div class="payment-icons">
+          <svg class="pay-logo" viewBox="0 0 48 30"><rect width="48" height="30" rx="4" fill="#1A1F71"/><text x="24" y="19" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" font-family="Arial">VISA</text></svg>
+          <svg class="pay-logo" viewBox="0 0 48 30"><rect width="48" height="30" rx="4" fill="#fff" stroke="#e0e0e0"/><circle cx="19" cy="15" r="9" fill="#EB001B"/><circle cx="29" cy="15" r="9" fill="#F79E1B"/><circle cx="24" cy="15" r="5.5" fill="#FF5F00"/></svg>
+          <svg class="pay-logo" viewBox="0 0 48 30"><rect width="48" height="30" rx="4" fill="#006FCF"/><text x="24" y="19" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" font-family="Arial">AMEX</text></svg>
+          <svg class="pay-logo" viewBox="0 0 48 30"><rect width="48" height="30" rx="4" fill="#000"/><text x="24" y="20" text-anchor="middle" fill="#FFCB05" font-size="13" font-weight="700" font-style="italic" font-family="Arial">elo</text></svg>
+          <svg class="pay-logo" viewBox="0 0 48 30"><rect width="48" height="30" rx="4" fill="#32BCAD"/><text x="24" y="20" text-anchor="middle" fill="#fff" font-size="12" font-weight="700" font-family="Arial">pix</text></svg>
+          <div class="pay-icon pay-logo-more">…</div>
+        </div>
+        <button class="expand-btn" onclick="openModal('paymentModal')">
+          <span>Ver mais meios de pagamento</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- Q&A -->
+      <div class="card">
+        <h2 class="card-title-bold">Perguntas e respostas</h2>
+        <button class="btn-primary u-flex u-items-center u-justify-center u-gap-8" onclick="openModal('questionModal')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          Perguntar
+        </button>
+        <div class="qa-footer">
+          <span id="productCode">Anúncio #0000000</span>
+          <a href="#" class="link">Denunciar</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="ml-footer-product">
+    <div class="footer-app container-max-1200 p-16">
+      <a href="https://play.google.com/store/apps/details?id=com.mercadolibre&hl=pt_BR" target="_blank" rel="noopener noreferrer" class="app-banner">
+        <div class="app-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFE600"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </div>
+        <span class="app-text">Compre e venda com o app!</span>
+      </a>
+    </div>
+    <div class="footer-bottom container-max-1200">
+      <div class="footer-links">
+        <a href="#">Termos e condições</a>
+        <a href="#">Promoções</a>
+        <a href="#">Como cuidamos da sua privacidade</a>
+        <a href="#">Acessibilidade</a>
+        <a href="#">Blog</a>
+      </div>
+      <p class="copyright">© 1999-2026 Ebazar.com.br LTDA.</p>
+      <p class="copyright">CNPJ n.º 03.007.331/0001-41 / Av. das Nações Unidas, nº 3.003, Bonfim, Osasco/SP - CEP 06233-903 - empresa do grupo Mercado Livre.</p>
+    </div>
+  </footer>
+
+  <!-- ====== DRAWERS (CARRINHO E FAVORITOS) ====== -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawers()"></div>
+
+  <div class="drawer-panel" id="cartDrawer">
+    <div class="drawer-header">
+      <h3>Carrinho de Compras</h3>
+      <button class="drawer-close" onclick="closeDrawers()">×</button>
+    </div>
+    <div class="drawer-body" id="cartBody">
+      <div class="drawer-empty">Seu carrinho está vazio</div>
+    </div>
+    <div class="drawer-footer">
+      <div class="drawer-total"><span>Total</span> <span id="cartTotal">R$ 0,00</span></div>
+      <button class="btn-primary w-full radius-6 p-14" onclick="checkoutCart()">Continuar compra</button>
+    </div>
+  </div>
+
+  <div class="drawer-panel" id="favDrawer">
+    <div class="drawer-header">
+      <h3>Meus Favoritos</h3>
+      <button class="drawer-close" onclick="closeDrawers()">×</button>
+    </div>
+    <div class="drawer-body" id="favBody">
+      <div class="drawer-empty">Nenhum favorito ainda</div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <div id="shareModal" class="modal-overlay" onclick="closeModalOverlay(event)">
+    <div class="modal-box">
+      <div class="modal-header"><h3>Link exclusivo</h3><button onclick="closeModal('shareModal')" class="modal-close">&times;</button></div>
+      <div class="modal-icon-row"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FF7733" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><p>Este link de promoção é <strong>válido apenas para 1 dispositivo</strong> e não pode ser compartilhado.</p></div>
+      <p class="modal-sub">Para garantir a segurança da promoção, cada link é único e intransferível.</p>
+      <button class="btn-primary" onclick="closeModal('shareModal')">Entendi</button>
+    </div>
+  </div>
+
+  <div id="addressModal" class="modal-overlay" onclick="closeModalOverlay(event)">
+    <div class="modal-box">
+      <div class="modal-header"><h3>Informe seu endereço</h3><button onclick="closeModal('addressModal')" class="modal-close">&times;</button></div>
+      <div class="modal-body">
+        <label class="field-label" for="cepInput">CEP</label>
+        <input type="text" id="cepInput" placeholder="00000-000" maxlength="8" class="field-input" oninput="handleCepInput(this)">
+        <p id="cepLoading" class="field-hint u-none">Buscando endereço...</p>
+        <p id="cepError" class="field-error u-none"></p>
+        <div id="addressFields" class="u-none">
+          <label class="field-label" for="ruaInput">Rua</label>
+          <input type="text" id="ruaInput" disabled class="field-input disabled-input">
+          <div class="field-row">
+            <div><label class="field-label" for="numeroInput">Número *</label><input type="text" id="numeroInput" placeholder="Nº" class="field-input"></div>
+            <div><label class="field-label" for="complementoInput">Complemento</label><input type="text" id="complementoInput" placeholder="Apto, bloco..." class="field-input"></div>
+          </div>
+          <label class="field-label" for="bairroInput">Bairro</label>
+          <input type="text" id="bairroInput" disabled class="field-input disabled-input">
+          <div class="field-row">
+            <div><label class="field-label" for="cidadeInput">Cidade</label><input type="text" id="cidadeInput" disabled class="field-input disabled-input"></div>
+            <div><label class="field-label" for="ufInput">Estado</label><input type="text" id="ufInput" disabled class="field-input disabled-input"></div>
+          </div>
+        </div>
+        <button class="btn-primary m-t-16" id="saveAddressBtn" onclick="saveAddress()" disabled>Salvar endereço</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="characteristicsModal" class="modal-overlay" onclick="closeModalOverlay(event)">
+    <div class="modal-box modal-lg">
+      <div class="modal-header sticky-header"><h3>Características do produto</h3><button onclick="closeModal('characteristicsModal')" class="modal-close">&times;</button></div>
+      <div class="modal-body" id="charModalBody"></div>
+    </div>
+  </div>
+
+  <div id="paymentModal" class="modal-overlay" onclick="closeModalOverlay(event)">
+    <div class="modal-box modal-lg">
+      <div class="modal-header sticky-header"><h3>Meios de pagamento para este produto</h3><button onclick="closeModal('paymentModal')" class="modal-close">&times;</button></div>
+      <div class="modal-body">
+        <div class="mp-intro">
+          <svg class="u-w-40 u-h-40 u-flex-shrink-0" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="#00BCFF"/><path d="M17 28l-7-7 2-2 5 5 10-10 2 2z" fill="#fff"/></svg>
+          <p>Pagar com o <strong class="u-color-blue-info">Mercado Pago</strong> é rápido, seguro e sem custo adicional.</p>
+        </div>
+        <h4 class="bold">Cartões de crédito</h4>
+        <p class="green text-sm">Até 12x sem juros com cartão Mercado Pago</p>
+        <div class="cards-grid m-y-16">
+          <div class="card-col"><svg class="pay-logo-md" viewBox="0 0 52 34"><rect width="52" height="34" rx="4" fill="#1A1F71"/><text x="26" y="22" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Arial">VISA</text></svg><span class="green text-xs">12x</span></div>
+          <div class="card-col"><svg class="pay-logo-md" viewBox="0 0 52 34"><rect width="52" height="34" rx="4" fill="#fff" stroke="#e0e0e0"/><circle cx="20" cy="17" r="10" fill="#EB001B"/><circle cx="32" cy="17" r="10" fill="#F79E1B"/><circle cx="26" cy="17" r="6" fill="#FF5F00"/></svg><span class="green text-xs">10x</span></div>
+          <div class="card-col"><svg class="pay-logo-md" viewBox="0 0 52 34"><rect width="52" height="34" rx="4" fill="#006FCF"/><text x="26" y="22" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="Arial">AMEX</text></svg><span class="green text-xs">10x</span></div>
+          <div class="card-col"><svg class="pay-logo-md" viewBox="0 0 52 34"><rect width="52" height="34" rx="4" fill="#000"/><text x="26" y="23" text-anchor="middle" fill="#FFCB05" font-size="15" font-weight="700" font-style="italic" font-family="Arial">elo</text></svg><span class="green text-xs">10x</span></div>
+        </div>
+        <hr class="divider">
+        <h4 class="bold">Pix</h4>
+        <p class="green text-sm">Aprovação imediata.</p>
+        <div class="m-y-8"><svg class="pay-logo-md" viewBox="0 0 52 34"><rect width="52" height="34" rx="4" fill="#32BCAD"/><text x="26" y="23" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="Arial">pix</text></svg></div>
+        <hr class="divider">
+        <h4 class="bold">Boleto bancário</h4>
+        <p class="muted text-sm">Pagamento em qualquer agência bancária, caixa eletrônico ou Internet Banking.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="returnsModal" class="modal-overlay" onclick="closeModalOverlay(event)">
+    <div class="modal-box">
+      <div class="modal-header"><h3>Devolução grátis!</h3><button onclick="closeModal('returnsModal')" class="modal-close">&times;</button></div>
+      <div class="modal-body">
+        <div class="return-row"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><p>Você tem 30 dias a contar da data de recebimento.</p></div>
+        <div class="return-row"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><polyline points="9 10 4 15 9 20"/><path d="M20 4v7a4 4 0 0 1-4 4H4"/></svg><p>Envie-o pelos Correios ou em uma Agência Mercado Livre.</p></div>
+        <div class="return-row"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><p>É importante revisar as <a href="#" class="link">políticas de devolução</a>.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="questionModal" class="modal-overlay" onclick="closeModalOverlay(event)">
+    <div class="modal-box">
+      <div class="modal-header"><h3>O que você precisa saber?</h3><button onclick="closeModal('questionModal')" class="modal-close">&times;</button></div>
+      <div class="modal-body">
+        <label for="questionText" class="sr-only">Digite sua pergunta</label>
+        <textarea id="questionText" placeholder="Digite sua pergunta..." class="question-textarea"></textarea>
+        <button class="btn-primary" onclick="sendQuestion()">Enviar pergunta</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="questionSuccessModal" class="modal-overlay" onclick="closeModalOverlay(event)">
+    <div class="modal-box u-text-center">
+      <div class="success-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+      <h3 class="m-y-16">Pergunta enviada!</h3>
+      <p class="muted text-sm m-b-24">Sua pergunta foi enviada para o vendedor.</p>
+      <button class="btn-primary" onclick="closeModal('questionSuccessModal')">Entendi</button>
+    </div>
+  </div>
+
+  <script src="/protect.js"></script>
+  <script src="/produto.js"></script>
+</body>
+</html>

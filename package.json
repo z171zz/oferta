@@ -1,0 +1,10 @@
+{
+  "name": "mercadollibre-shop",
+  "version": "2.0.0",
+  "description": "E-commerce multi-produtos estilo Mercado Livre — Netlify + Supabase",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No tests configured\" && exit 0"
+  },
+  "dependencies": {}
+}

