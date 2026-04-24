@@ -119,13 +119,75 @@ input,textarea,select{font-family:inherit}
 .ml-carousel-image-full img{height:90%;width:auto;object-fit:contain;margin-right:20px}
 .hero-overlay{position:relative;z-index:2}
 .text-shadow{text-shadow:0 1px 3px rgba(255,255,255,0.8), 0 0 15px rgba(255,255,255,0.4)}
-.ml-carousel-arrow{position:absolute;top:50%;transform:translateY(-60%);width:44px;height:44px;background:#fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;z-index:5;transition:box-shadow .2s}
-.ml-carousel-arrow:hover{box-shadow:0 4px 16px rgba(0,0,0,.2)}
-.ml-carousel-prev{left:16px}
-.ml-carousel-next{right:16px}
-.ml-carousel-dots{position:absolute;bottom:50px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5}
-.ml-carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,.2);border:none;cursor:pointer;padding:0;transition:background .2s}
-.ml-carousel-dot.active{background:#3483FA;width:20px;border-radius:4px}
+/* ====== CAROUSEL ====== */
+.ml-hero-container {
+  background-color: #fff159;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.ml-carousel {
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+  height: 340px;
+}
+.ml-carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+.ml-carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  display: none;
+}
+.ml-carousel-slide.active {
+  display: block;
+}
+.ml-carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ml-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  width: 40px;
+  height: 80px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  z-index: 10;
+}
+.ml-carousel-nav.prev { left: 0; border-radius: 0 40px 40px 0; }
+.ml-carousel-nav.next { right: 0; border-radius: 40px 0 0 40px; }
+.ml-carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+.ml-carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  border: none;
+}
+.ml-carousel-dots .dot.active {
+  background: white;
+}
 
 /* === BENEFITS BAR === */
 .ml-benefits-section{margin-top:-35px;position:relative;z-index:3;padding:0 20px}
@@ -250,8 +312,8 @@ input,textarea,select{font-family:inherit}
 .thumb-btn:hover{border-color:#ccc}
 .thumb-btn img{width:100%;height:100%;object-fit:contain}
 .main-image-wrap{flex:1;position:relative}
-.main-image-container{position:relative;aspect-ratio:1;max-width:500px;margin:0 auto;display:flex;align-items:center;justify-content:center}
-.main-image{max-width:100%;max-height:100%;object-fit:contain}
+.main-image-container{position:relative;aspect-ratio:1;max-width:100%;height: 480px;margin:0 auto;display:flex;align-items:center;justify-content:center}
+.main-image{width:100%;height:100%;object-fit:contain;cursor: zoom-in}
 .gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;background:#fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center}
 .gallery-arrow:hover{background:#f5f5f5}
 .arrow-left{left:8px}.arrow-right{right:8px}

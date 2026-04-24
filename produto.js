@@ -44,9 +44,9 @@ async function loadProduct() {
   const slug = path && path !== 'produto.html' && path !== 'index.html' ? path : urlParams.get('slug');
 
   // If no slug, or if it's a system page, don't try to load as product
-  const systemPages = ['', 'admin', 'admin.html', 'checkout', 'checkout.html', 'index.html', 'produto.html'];
+  const systemPages = ['', 'admin', 'admin.html', 'checkout', 'checkout.html', 'comprar', 'index.html', 'produto.html', 'inicio'];
   if (!slug || systemPages.includes(slug)) {
-    if (!slug || slug === '') window.location.href = '/';
+    console.log('System page detected, bypassing product load.');
     return;
   }
 
@@ -57,6 +57,17 @@ async function loadProduct() {
     
     currentProduct = data;
     productImages = data.images || data.images_json || [];
+
+    // Features Section
+    if(data.features) {
+      const section = document.getElementById('featuresSection');
+      const list = document.getElementById('featuresList');
+      if(section && list) {
+        const features = data.features.split('\n').filter(f => f.trim() !== '');
+        list.innerHTML = features.map(f => `<li>${f}</li>`).join('');
+        section.style.display = 'block';
+      }
+    }
     
     // Update page title
     document.title = data.name + ' | Mercado Livre';

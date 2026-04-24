@@ -65,26 +65,21 @@
 </header>
 
 <!-- ====== HERO CAROUSEL ====== -->
-<section class="ml-hero">
-  <div class="ml-carousel" id="heroCarousel">
-    <div class="ml-carousel-track" id="carouselTrack">
-      <div class="ml-carousel-slide active bg-yellow">
-        <div class="ml-carousel-content">
-          <div class="ml-carousel-text hero-overlay">
-            <span class="ml-carousel-tag">OFERTA DO DIA</span>
-            <h2 class="text-shadow">Até 40% OFF</h2>
-            <p class="text-shadow">Nos melhores produtos selecionados</p>
-            <a href="#" class="ml-carousel-cta">Ver ofertas</a>
-          </div>
-          <div class="ml-carousel-image-full">
-            <img src="https://png.pngtree.com/png-vector/20221014/ourmid/pngtree-mega-offer-text-for-banner-vector-image-png-image_6320984.png" alt="Oferta">
-          </div>
-        </div>
+  <div class="ml-hero-container">
+    <div class="ml-carousel" id="heroCarousel">
+      <div class="ml-carousel-track" id="carouselTrack">
+        <div class="ml-carousel-slide active"><img src="https://http2.mlstatic.com/D_NQ_667836-MLA74349586053_022024-OO.webp" alt="Banner 1"></div>
+        <div class="ml-carousel-slide"><img src="https://http2.mlstatic.com/storage/splinter-admin/o:f_webp,q_auto:best/1711650124829-novodesktophome-mainslider-2.jpg" alt="Banner 2"></div>
+        <div class="ml-carousel-slide"><img src="https://http2.mlstatic.com/D_NQ_704991-MLA75713959137_042024-OO.webp" alt="Banner 3"></div>
+        <div class="ml-carousel-slide"><img src="https://http2.mlstatic.com/D_NQ_721271-MLA75552683638_042024-OO.webp" alt="Banner 4"></div>
+        <div class="ml-carousel-slide"><img src="https://http2.mlstatic.com/D_NQ_772684-MLA75575726060_042024-OO.webp" alt="Banner 5"></div>
+        <div class="ml-carousel-slide"><img src="https://http2.mlstatic.com/D_NQ_907334-MLA75688551303_042024-OO.webp" alt="Banner 6"></div>
       </div>
+      <button class="ml-carousel-nav prev" onclick="moveCarousel(-1)">&#10094;</button>
+      <button class="ml-carousel-nav next" onclick="moveCarousel(1)">&#10095;</button>
+      <div class="ml-carousel-dots" id="carouselDots"></div>
     </div>
-    <div class="ml-carousel-dots" id="carouselDots"></div>
   </div>
-</section>
 
 <!-- ====== O QUE VOCÊ BUSCOU ====== (Será preenchido pela busca) -->
 <section class="ml-section u-none" id="searchResultsSection">
@@ -425,9 +420,41 @@ function clearSearch() {
   document.getElementById('searchResultsSection').style.display = 'none';
 }
 
+// ====== CAROUSEL LOGIC ======
+let currentSlide = 0;
+const slides = document.querySelectorAll('.ml-carousel-slide');
+const dotsContainer = document.getElementById('carouselDots');
+
+function initCarousel() {
+  if(!slides.length) return;
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+  setInterval(() => moveCarousel(1), 5000);
+}
+
+function moveCarousel(step) {
+  let next = currentSlide + step;
+  if(next >= slides.length) next = 0;
+  if(next < 0) next = slides.length - 1;
+  goToSlide(next);
+}
+
+function goToSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  dotsContainer.children[currentSlide].classList.remove('active');
+  currentSlide = n;
+  slides[currentSlide].classList.add('active');
+  dotsContainer.children[currentSlide].classList.add('active');
+}
+
 // ====== INIT ======
 document.addEventListener('DOMContentLoaded', function() {
   loadProducts();
+  initCarousel();
 });
 </script>
 </body>
