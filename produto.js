@@ -58,14 +58,17 @@ async function loadProduct() {
     currentProduct = data;
     productImages = data.images || data.images_json || [];
 
-    // Features Section
-    if(data.features) {
+    // Features Section (campo manual - será sobrescrito se source_html tiver os dados)
+    // O source_html tem prioridade - a extração automática acontece mais abaixo
+    if(data.features && !data.source_html) {
       const section = document.getElementById('featuresSection');
       const list = document.getElementById('featuresList');
       if(section && list) {
         const features = data.features.split('\n').filter(f => f.trim() !== '');
-        list.innerHTML = features.map(f => `<li>${f}</li>`).join('');
-        section.style.display = 'block';
+        if(features.length > 0) {
+          list.innerHTML = features.map(f => `<li>${f}</li>`).join('');
+          section.style.display = 'block';
+        }
       }
     }
     
@@ -166,6 +169,61 @@ async function loadProduct() {
            shadow.innerHTML = stylesheets + '<div style="background:#fff;padding:24px;font-family:\'Proxima Nova\',sans-serif">' + htmlContent + '</div>';
            return div;
         };
+
+        // 0. "O que você precisa saber" — Extrair da source_html automaticamente
+        var highlightedSpecs = doc.querySelector('.ui-vpp-highlighted-specs') 
+          || doc.querySelector('[class*="highlighted-specs"]')
+          || doc.querySelector('[class*="short-description"]');
+        
+        if (highlightedSpecs) {
+          // Extrair itens da lista
+          var listItems = highlightedSpecs.querySelectorAll('li, [class*="features-list-item"], [class*="spec-item"]');
+          if (listItems.length > 0) {
+            var section = document.getElementById('featuresSection');
+            var list = document.getElementById('featuresList');
+            if (section && list) {
+              var featuresHtml = '';
+              listItems.forEach(function(li) {
+                var text = li.textContent.trim();
+                if (text) featuresHtml += '<li>' + text + '</li>';
+              });
+              if (featuresHtml) {
+                list.innerHTML = featuresHtml;
+                section.style.display = 'block';
+              }
+            }
+          }
+        }
+
+        // Se não encontrou via highlighted-specs, tenta buscar qualquer lista de features genérica
+        if (!highlightedSpecs) {
+          // Busca por padrões comuns de "o que voce precisa saber"
+          var allElements = doc.querySelectorAll('h2, h3, .section-title');
+          allElements.forEach(function(el) {
+            var text = el.textContent.toLowerCase();
+            if (text.includes('precisa saber') || text.includes('highlights') || text.includes('destaques')) {
+              var parent = el.parentElement;
+              if (parent) {
+                var items = parent.querySelectorAll('li');
+                if (items.length > 0) {
+                  var section = document.getElementById('featuresSection');
+                  var list = document.getElementById('featuresList');
+                  if (section && list) {
+                    var html = '';
+                    items.forEach(function(li) {
+                      var t = li.textContent.trim();
+                      if (t) html += '<li>' + t + '</li>';
+                    });
+                    if (html) {
+                      list.innerHTML = html;
+                      section.style.display = 'block';
+                    }
+                  }
+                }
+              }
+            }
+          });
+        }
 
         // 1. Detalhes (Descrição com Imagens)
         var descNode = doc.querySelector('.ui-pdp-description');
