@@ -34,27 +34,37 @@
     </div>
   </div>
 
-  <!-- Nav Bar -->
+  <!-- Nav Bar Secundário -->
   <div class="ml-nav-bar">
     <div class="ml-container">
       <nav class="ml-nav">
+        <a href="javascript:location.reload()" class="ml-nav-location" title="Informe seu CEP">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Informe seu<br><strong>CEP</strong></span>
+        </a>
+        <div class="ml-nav-divider"></div>
         <ul class="ml-nav-list">
-          <li><a href="#" class="ml-nav-link">Categorias <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></a></li>
-          <li><a href="#" class="ml-nav-link">Ofertas do dia</a></li>
-          <li><a href="#" class="ml-nav-link">Histórico</a></li>
-          <li><a href="#" class="ml-nav-link">Supermercado</a></li>
-          <li><a href="#" class="ml-nav-link">Moda</a></li>
+          <li><a href="javascript:location.reload()" class="ml-nav-link">Categorias <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></a></li>
+          <li><a href="javascript:location.reload()" class="ml-nav-link">Ofertas do dia</a></li>
+          <li><a href="javascript:location.reload()" class="ml-nav-link">Histórico</a></li>
+          <li><a href="javascript:location.reload()" class="ml-nav-link">Moda</a></li>
+          <li><a href="javascript:location.reload()" class="ml-nav-link ml-nav-link-play">Mercado Play <span class="ml-badge-gratis">GRÁTIS</span></a></li>
+          <li><a href="javascript:location.reload()" class="ml-nav-link">Vender</a></li>
+          <li><a href="javascript:location.reload()" class="ml-nav-link">Contato</a></li>
         </ul>
         <div class="ml-nav-right">
+          <a href="javascript:location.reload()" class="ml-nav-user-link">Crie a sua conta</a>
+          <a href="javascript:location.reload()" class="ml-nav-user-link">Entre</a>
+          <a href="javascript:location.reload()" class="ml-nav-user-link">Compras</a>
           <div class="icon-wrapper" onclick="toggleDrawer('favDrawer')">
             <span class="ml-nav-link">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </span>
             <span class="badge u-none" id="favBadge">0</span>
           </div>
-          <div class="icon-wrapper m-l-20" onclick="toggleDrawer('cartDrawer')">
+          <div class="icon-wrapper" onclick="toggleDrawer('cartDrawer')">
             <span class="ml-nav-link">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
             </span>
             <span class="badge u-none" id="cartBadge">0</span>
           </div>
@@ -80,6 +90,82 @@
       <div class="ml-carousel-dots" id="carouselDots"></div>
     </div>
   </div>
+
+<!-- ====== SHORTCUT CARDS ====== -->
+<section class="ml-shortcuts-section">
+  <div class="ml-container">
+    <div class="ml-shortcuts-grid">
+      <!-- Card 1: Localização -->
+      <a href="javascript:location.reload()" class="ml-shortcut-card">
+        <h3 class="ml-shortcut-title">Insira sua localização</h3>
+        <div class="ml-shortcut-icon">
+          <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="28" r="22" fill="#FFF159"/>
+            <path d="M32 8C22.06 8 14 16.06 14 26c0 12 18 30 18 30s18-18 18-30c0-9.94-8.06-18-18-18z" fill="#FF6B35" opacity="0.9"/>
+            <circle cx="32" cy="26" r="6" fill="#fff"/>
+            <circle cx="32" cy="26" r="3" fill="#FF6B35"/>
+          </svg>
+        </div>
+        <p class="ml-shortcut-desc">Confira os custos e prazos de entrega</p>
+        <span class="ml-shortcut-btn">Inserir localização</span>
+      </a>
+      <!-- Card 2: Conta -->
+      <a href="javascript:location.reload()" class="ml-shortcut-card">
+        <h3 class="ml-shortcut-title">Entre na sua conta</h3>
+        <div class="ml-shortcut-icon">
+          <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+            <rect x="10" y="10" width="44" height="34" rx="4" fill="#FFF159" stroke="#E6D800" stroke-width="2"/>
+            <circle cx="32" cy="24" r="6" fill="#3483FA" opacity="0.85"/>
+            <path d="M22 38c0-5.52 4.48-10 10-10s10 4.48 10 10" fill="#3483FA" opacity="0.6"/>
+          </svg>
+        </div>
+        <p class="ml-shortcut-desc">Aproveite ofertas para comprar tudo que quiser</p>
+        <span class="ml-shortcut-btn">Entrar na sua conta</span>
+      </a>
+      <!-- Card 3: Pagamento -->
+      <a href="javascript:location.reload()" class="ml-shortcut-card">
+        <h3 class="ml-shortcut-title">Meios de pagamento</h3>
+        <div class="ml-shortcut-icon">
+          <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+            <rect x="8" y="16" width="48" height="32" rx="6" fill="#8B6914"/>
+            <rect x="12" y="20" width="40" height="24" rx="4" fill="#A67C00"/>
+            <rect x="16" y="28" width="16" height="4" rx="2" fill="#FFF159"/>
+            <circle cx="44" cy="34" r="5" fill="#FFF159" opacity="0.8"/>
+          </svg>
+        </div>
+        <p class="ml-shortcut-desc">Pague suas compras com rapidez e segurança</p>
+        <span class="ml-shortcut-btn">Mostrar meios</span>
+      </a>
+      <!-- Card 4: Menos de R$100 -->
+      <a href="javascript:location.reload()" class="ml-shortcut-card">
+        <h3 class="ml-shortcut-title">Menos de R$100</h3>
+        <div class="ml-shortcut-icon">
+          <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="22" fill="#00A650" opacity="0.15"/>
+            <circle cx="32" cy="32" r="16" fill="#00A650" opacity="0.3"/>
+            <text x="32" y="37" text-anchor="middle" fill="#00A650" font-size="18" font-weight="bold">R$</text>
+            <path d="M20 12l4-4 4 4" stroke="#00A650" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <p class="ml-shortcut-desc">Confira produtos com preços baixos</p>
+        <span class="ml-shortcut-btn">Mostrar produtos</span>
+      </a>
+      <!-- Card 5: Mais vendidos -->
+      <a href="javascript:location.reload()" class="ml-shortcut-card">
+        <h3 class="ml-shortcut-title">Mais vendidos</h3>
+        <div class="ml-shortcut-icon">
+          <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+            <rect x="12" y="20" width="18" height="28" rx="3" fill="#3483FA" opacity="0.7"/>
+            <rect x="34" y="14" width="18" height="34" rx="3" fill="#3483FA" opacity="0.5"/>
+            <path d="M16 28h10M16 34h10M38 22h10M38 28h10M38 34h10" stroke="#fff" stroke-width="2"/>
+          </svg>
+        </div>
+        <p class="ml-shortcut-desc">Explore os produtos que são tendência</p>
+        <span class="ml-shortcut-btn">Ir para Mais vendidos</span>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- ====== O QUE VOCÊ BUSCOU ====== (Será preenchido pela busca) -->
 <section class="ml-section u-none" id="searchResultsSection">

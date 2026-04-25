@@ -28,9 +28,10 @@ input,textarea,select{font-family:inherit}
 .ml-top-links a:hover{text-decoration:none;color:#333}
 
 /* === MAIN HEADER === */
-.ml-main-header { background:#FFF159; border-bottom: 1px solid rgba(0,0,0,.08); padding-bottom: 15px; }
+.ml-main-header { background:#FFF159; border-bottom: none; padding: 10px 0; }
+.ml-header-flex { display: flex; align-items: center; gap: 16px; }
 .ml-logo-img { height: 38px; width: auto; }
-.ml-nav-bar { background: #FFE600; }
+.ml-nav-bar { background: #FFF159; }
 .m-l-20 { margin-left: 20px; }
 .m-t-10 { margin-top: 10px; }
 .m-t-16 { margin-top: 16px; }
@@ -95,12 +96,30 @@ input,textarea,select{font-family:inherit}
 
 /* === NAV BAR === */
 .ml-nav-bar{background:#FFF159;padding:6px 0;border-top:1px solid rgba(0,0,0,.08)}
-.ml-nav{display:flex;align-items:center;justify-content:space-between}
-.ml-nav-list{display:flex;gap:20px;list-style:none;font-size:14px}
+.ml-nav{display:flex;align-items:center;gap:0}
+.ml-nav-list{display:flex;gap:18px;list-style:none;font-size:14px;margin:0;padding:0}
 .ml-nav-link{display:flex;align-items:center;gap:3px;color:#333;text-decoration:none;white-space:nowrap;cursor:pointer;font-size:14px}
 .ml-nav-link:hover{color:#333;text-decoration:none}
-.ml-nav-right{display:flex;align-items:center;gap:16px}
-.ml-nav-location{font-size:13px;color:#333}
+.ml-nav-right{display:flex;align-items:center;gap:14px;margin-left:auto}
+.ml-nav-location{display:flex;align-items:center;gap:6px;color:#333;text-decoration:none;font-size:12px;line-height:1.2;white-space:nowrap;flex-shrink:0;padding-right:12px}
+.ml-nav-location:hover{text-decoration:none}
+.ml-nav-location strong{font-weight:600;font-size:13px}
+.ml-nav-divider{width:1px;height:24px;background:rgba(0,0,0,.15);margin:0 12px;flex-shrink:0}
+.ml-nav-link-play{font-weight:500}
+.ml-badge-gratis{display:inline-block;background:#00A650;color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px;margin-left:4px;letter-spacing:.3px;line-height:1;vertical-align:middle;text-transform:uppercase}
+.ml-nav-user-link{font-size:14px;color:#333;text-decoration:none;white-space:nowrap}
+.ml-nav-user-link:hover{text-decoration:none;color:#333}
+
+/* === SHORTCUT CARDS === */
+.ml-shortcuts-section{background:linear-gradient(to bottom,#FFF159 0%,#FFF159 50%,#EBEBEB 50%,#EBEBEB 100%);padding:0 0 8px}
+.ml-shortcuts-grid{display:flex;gap:12px;max-width:1188px;margin:0 auto}
+.ml-shortcut-card{flex:1;background:#fff;border-radius:6px;padding:20px 16px;text-align:center;text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;gap:6px;transition:box-shadow .25s ease,transform .2s ease;border:1px solid rgba(0,0,0,.06);min-height:200px;justify-content:center}
+.ml-shortcut-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.1);transform:translateY(-2px);text-decoration:none}
+.ml-shortcut-title{font-size:15px;font-weight:600;color:#333;margin:0 0 4px}
+.ml-shortcut-icon{width:56px;height:56px;display:flex;align-items:center;justify-content:center;margin:4px 0}
+.ml-shortcut-desc{font-size:13px;color:#666;line-height:1.35;margin:0;flex:1;display:flex;align-items:center}
+.ml-shortcut-btn{display:inline-block;font-size:13px;color:#3483FA;font-weight:600;cursor:pointer;padding:6px 0;margin-top:auto;border:none;background:none;text-decoration:none}
+.ml-shortcut-card:hover .ml-shortcut-btn{text-decoration:underline}
 
 /* === HERO CAROUSEL === */
 .ml-hero{position:relative;overflow:hidden}
@@ -443,6 +462,10 @@ input,textarea,select{font-family:inherit}
   .ml-carousel-content{padding:20px}
   .ml-carousel-text h2{font-size:30px}
   .ml-carousel-image{max-width:300px}
+  .ml-nav-user-link{font-size:12px}
+  .ml-shortcuts-grid{gap:8px}
+  .ml-shortcut-card{padding:16px 12px;min-height:180px}
+  .ml-shortcut-title{font-size:14px}
 }
 
 @media(max-width:768px){
@@ -451,8 +474,10 @@ input,textarea,select{font-family:inherit}
   .ml-search-bar{order:3;max-width:100%;flex-basis:100%;margin:8px 0 0}
   .ml-header-banner-ad{display:none}
   .badge.u-none { display: none !important; }
-  .ml-nav-list{gap:12px;font-size:13px;overflow-x:auto}
+  .ml-nav-list{gap:10px;font-size:13px;overflow-x:auto}
   .ml-nav-right{display:none}
+  .ml-nav-location{display:none}
+  .ml-nav-divider{display:none}
   .ml-carousel-slide{min-height:220px}
   .ml-carousel-content{min-height:220px;padding:16px}
   .ml-carousel-text h2{font-size:24px}
@@ -470,6 +495,8 @@ input,textarea,select{font-family:inherit}
   .ml-info-grid{grid-template-columns:1fr}
   .ml-section-title{font-size:20px}
   .ml-offer-card{flex:0 0 150px}
+  .ml-shortcuts-grid{flex-wrap:wrap}
+  .ml-shortcut-card{flex:1 1 calc(33.33% - 8px);min-width:140px;min-height:160px}
   /* Product page responsive */
   .product-layout{flex-direction:column}
   .gallery-col,.buy-col{width:100%}
